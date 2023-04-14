@@ -10,6 +10,9 @@ const Gameboard = (rows = 8, cols = 8) => {
         }
     }
 
+    const getRows = () => rows;
+    const getColumns = () => cols;
+
     const shipCoords = [];
 
     const placeShip = (ship, x, y, isVertical) => {
@@ -44,21 +47,21 @@ const Gameboard = (rows = 8, cols = 8) => {
     const receiveAttack = (x, y) => {
         if (board[x][y] == 'S') { // hit
             board[x][y] = 'H';
+            
+            for (const shipAndCoords of shipCoords) {
+                const ship = shipAndCoords[0], coords = shipAndCoords[1];
 
-            // register hit on respective ship
-            for (const [ship, coords] of shipCoords) {
-                if (x == coords[0] && y == coords[1]) {
-                    ship.hit(1);
-                }
+                for (const coord of coords)
+                    if (x == coord[0] && y == coord[1])
+                        ship.hit(1);
             }
-
         } else { // miss
             board[x][y] = 'M';
         }
     };
 
     const allShipsSunk = () => {
-        for (const ship of ships) {
+        for (const [ship] of shipCoords) {
             if (!ship.isSunk()) return false;
         }
         return true;
@@ -66,6 +69,8 @@ const Gameboard = (rows = 8, cols = 8) => {
 
     return {
         board,
+        getRows,
+        getColumns,
         placeShip,
         receiveAttack,
         allShipsSunk
