@@ -23,7 +23,7 @@ const Gameboard = (rows = 8, cols = 8) => {
             for (let i = 0; i < ship.getLength(); i++) {
                 if (x < 0 || x >= board.length) {
                     board = prevBoard;
-                    return `Cannot vertically place ship on row ${x}!`;
+                    return `Cannot place ship vertically on row ${x}!`;
                 }
 
                 coords.push([x, y]);
@@ -33,7 +33,7 @@ const Gameboard = (rows = 8, cols = 8) => {
             for (let i = 0; i < ship.getLength(); i++) {
                 if (y < 0 || y >= board[0].length) {
                     board = prevBoard;
-                    return `Cannot horizontally place ship on column ${y}!`;
+                    return `Cannot place ship horizontally on column ${y}!`;
                 }
                 
                 coords.push([x, y]);
@@ -42,6 +42,7 @@ const Gameboard = (rows = 8, cols = 8) => {
         }
 
         shipCoords.push([ship, coords]);
+        return `Successfully placed ship ${isVertical ? 'vertically' : 'horizontally'} on [${x},${y}]`;
     };
 
     const receiveAttack = (x, y) => {
