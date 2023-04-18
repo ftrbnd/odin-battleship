@@ -12,37 +12,38 @@ const Gameboard = (rows = 8, cols = 8) => {
 
     const getRows = () => rows;
     const getColumns = () => cols;
+    const getBoard = () => board;
 
     const shipCoords = [];
 
-    const placeShip = (ship, x, y, isVertical) => {
+    const placeShip = (ship, x, y, isVertical, marker) => {
         const prevBoard = JSON.parse(JSON.stringify(board));
         const coords = [];
 
         if (isVertical) {
             for (let i = 0; i < ship.getLength(); i++) {
-                if (x < 0 || x >= board.length) {
+                if (x < 0 || x >= rows || board[x][y] != '_') {
                     board = prevBoard;
-                    return `Cannot place ship vertically on row ${x}!`;
+                    return false;
                 }
 
                 coords.push([x, y]);
-                board[x++][y] = 'S';
+                board[x++][y] = marker;
             }
         } else {
             for (let i = 0; i < ship.getLength(); i++) {
-                if (y < 0 || y >= board[0].length) {
+                if (y < 0 || y >= cols || board[x][y] != '_') {
                     board = prevBoard;
-                    return `Cannot place ship horizontally on column ${y}!`;
+                    return false;
                 }
                 
                 coords.push([x, y]);
-                board[x][y++] = 'S';
+                board[x][y++] = marker;
             }
         }
 
         shipCoords.push([ship, coords]);
-        return `Successfully placed ship ${isVertical ? 'vertically' : 'horizontally'} on [${x},${y}]`;
+        return true;
     };
 
     const receiveAttack = (x, y) => {
@@ -69,9 +70,9 @@ const Gameboard = (rows = 8, cols = 8) => {
     }
 
     return {
-        board,
         getRows,
         getColumns,
+        getBoard,
         placeShip,
         receiveAttack,
         allShipsSunk
