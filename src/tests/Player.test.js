@@ -5,3 +5,10 @@ test("Enforce name requirement", () => {
 
     expect(player.getName()).toBe('Player');
 });
+
+test("Setting player name", () => {
+    const player = Player('P1');
+    player.setName('CustomName');
+
+    expect(player.getName()).toBe('CustomName');
+});
