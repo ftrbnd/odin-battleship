@@ -23,7 +23,7 @@ const Gameboard = (rows = 8, cols = 8) => {
             for (let i = 0; i < ship.getLength(); i++) {
                 if (x < 0 || x >= board.length) {
                     board = prevBoard;
-                    throw new RangeError(`Cannot vertically place ship on row ${x}!`);
+                    return `Cannot vertically place ship on row ${x}!`;
                 }
 
                 coords.push([x, y]);
@@ -33,7 +33,7 @@ const Gameboard = (rows = 8, cols = 8) => {
             for (let i = 0; i < ship.getLength(); i++) {
                 if (y < 0 || y >= board[0].length) {
                     board = prevBoard;
-                    throw new RangeError(`Cannot horizontally place ship on column ${y}!`);
+                    return `Cannot horizontally place ship on column ${y}!`;
                 }
                 
                 coords.push([x, y]);

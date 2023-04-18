@@ -36,7 +36,7 @@ test("Place ship on board out of range", () => {
     const board = Gameboard();
     const ship = Ship(10);
 
-    expect(() => board.placeShip(ship, 3, 4, true)).toThrow(Error);
+    expect(board.placeShip(ship, 3, 4, true)).toMatch(/place ship/);
 });
 
 test("Place ship on board and cause sink", () => {
