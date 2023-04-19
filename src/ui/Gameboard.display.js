@@ -7,6 +7,9 @@ export function displayBoard(board, id, player) {
 
     boardDiv.previousElementSibling.previousElementSibling.textContent = player.getName();
 
+    while (boardDiv.firstChild)
+        boardDiv.removeChild(boardDiv.firstChild);
+
     for (let r = 0; r < board.getRows(); r++) {
         for (let c = 0; c < board.getColumns(); c++) {
             const cell = document.createElement('div');
@@ -39,7 +42,6 @@ export function displayBoard(board, id, player) {
 
             boardDiv.appendChild(cell);
         }
-
     }
 }
 
