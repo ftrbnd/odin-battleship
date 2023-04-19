@@ -44,3 +44,8 @@ function setup(board_length = 10) {
 }
 
 setup();
+
+/**
+ * TODO: show players an empty grid so can't see the other's ships,
+ * and show their own boats underneath 
+ */
