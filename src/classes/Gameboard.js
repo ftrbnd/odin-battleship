@@ -47,7 +47,7 @@ const Gameboard = (rows = 8, cols = 8) => {
     };
 
     const receiveAttack = (x, y) => {
-        if (board[x][y] == 'S') { // hit
+        if (typeof board[x][y] == 'number') { // hit
             board[x][y] = 'H';
             
             for (const shipAndCoords of shipCoords) {

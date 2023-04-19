@@ -20,10 +20,22 @@ export function displayBoard(board, id, player) {
                 case 2:
                     cell.style.backgroundColor = 'lightgray';
                     break;
-                case '_':
-                default:
-                    break;
             }
+
+            cell.addEventListener('click', () => {
+                board.receiveAttack(r, c);
+                if (board.getBoard()[r][c] == 'H') {
+                    cell.style.backgroundColor = 'darkred';
+                } else if (board.getBoard()[r][c] == 'M') {
+                    cell.style.backgroundColor = 'navy';
+                }
+                
+                cell.style.pointerEvents = 'none';
+
+                if (board.allShipsSunk()) {
+                    console.log(`All of ${player.getName()}'s ships have sunk!`);
+                }
+            });
 
             boardDiv.appendChild(cell);
         }
