@@ -23,6 +23,10 @@ header {
     justify-items: center;
 }
 
+.boards div {
+    display: grid;
+}
+
 .boards h2 {
     grid-row: 1;
 }
@@ -35,6 +39,12 @@ header {
     height: 64px;
     width: 64px;
     text-align: center;
+    background-color: rgb(94, 94, 209);
 
     border: 1px solid black;
+}
+
+.cell:hover {
+    cursor: pointer;
+    background-color: rgb(187, 224, 236);
 }
