@@ -11,6 +11,9 @@ function game() {
     const boardTwo = Gameboard(SIDE_LENGTH, SIDE_LENGTH);
     populateBoards(SIDE_LENGTH, boardOne, boardTwo);
 
+    displayBoard(boardOne, 'board1');
+    // displayBoard(boardTwo, 'board2');
+
     console.log('Board 1: ', boardOne.getBoard());
     console.log('Board 2: ', boardTwo.getBoard());
 }
@@ -32,6 +35,26 @@ function populateBoards(sideLength, ...boards) {
                 shipLengths.push(length);
             }
         }
+    }
+}
+
+function displayBoard(board, id) {
+    const boardDiv = document.getElementById(id);
+    boardDiv.style.display = 'grid';
+    boardDiv.style.gridTemplateRows = `repeat(${board.getRows()}, 64px)`;
+    boardDiv.style.gridTemplateColumns = `repeat(${board.getRows()}, 64px)`;
+
+    for (let r = 0; r < board.getRows(); r++) {
+        for (let c = 0; c < board.getColumns(); c++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.setAttribute('id', `cell-${r}-${c}`);
+
+            cell.textContent = board.getBoard()[r][c];
+
+            boardDiv.appendChild(cell)
+        }
+
     }
 }
 
