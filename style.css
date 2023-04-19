@@ -7,10 +7,19 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    padding: 0 8px;
 }
 
-#board1, #board2 {
-    
+.boards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 24px;
+    justify-items: center;
+}
+
+.boards h2 {
+    grid-row: 1;
 }
 
 .cell {
