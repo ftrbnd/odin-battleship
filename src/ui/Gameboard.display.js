@@ -5,7 +5,7 @@ export function displayBoard(board, id, player) {
     boardDiv.style.gridTemplateRows = `repeat(${board.getRows()}, 64px)`;
     boardDiv.style.gridTemplateColumns = `repeat(${board.getRows()}, 64px)`;
 
-    boardDiv.previousElementSibling.textContent = player.getName();
+    boardDiv.previousElementSibling.previousElementSibling.textContent = player.getName();
 
     for (let r = 0; r < board.getRows(); r++) {
         for (let c = 0; c < board.getColumns(); c++) {
