@@ -1,9 +1,11 @@
 import Ship from "../classes/Ship";
 
-export function displayBoard(board, id) {
+export function displayBoard(board, id, player) {
     const boardDiv = document.getElementById(id);
     boardDiv.style.gridTemplateRows = `repeat(${board.getRows()}, 64px)`;
     boardDiv.style.gridTemplateColumns = `repeat(${board.getRows()}, 64px)`;
+
+    boardDiv.previousElementSibling.textContent = player.getName();
 
     for (let r = 0; r < board.getRows(); r++) {
         for (let c = 0; c < board.getColumns(); c++) {
