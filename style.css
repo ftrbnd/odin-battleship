@@ -1,0 +1,26 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#board1, #board2 {
+    
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 64px;
+    width: 64px;
+    text-align: center;
+
+    border: 1px solid black;
+}
