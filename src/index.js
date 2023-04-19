@@ -12,7 +12,7 @@ function game() {
     populateBoards(SIDE_LENGTH, boardOne, boardTwo);
 
     displayBoard(boardOne, 'board1');
-    // displayBoard(boardTwo, 'board2');
+    displayBoard(boardTwo, 'board2');
 
     console.log('Board 1: ', boardOne.getBoard());
     console.log('Board 2: ', boardTwo.getBoard());
@@ -48,7 +48,7 @@ function displayBoard(board, id) {
         for (let c = 0; c < board.getColumns(); c++) {
             const cell = document.createElement('div');
             cell.classList.add('cell');
-            cell.setAttribute('id', `cell-${r}-${c}`);
+            cell.setAttribute('id', `${id}-cell-${r}-${c}`);
 
             cell.textContent = board.getBoard()[r][c];
 
