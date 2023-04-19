@@ -20,7 +20,7 @@ function game() {
 
 function populateBoards(sideLength, ...boards) {
     for (const board of boards) {
-        const shipLengths = [5, 4, 3, 2, 2];
+        const shipLengths = [5, 4, 3, 3, 2];
         
         while (shipLengths.length > 0) {
             const length = shipLengths.pop();
