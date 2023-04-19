@@ -46,5 +46,9 @@ header {
 
 .cell:hover {
     cursor: pointer;
-    background-color: rgb(187, 224, 236);
+    filter: brightness(1.5);
+}
+
+.cell:active {
+    filter: brightness(0.75);
 }
