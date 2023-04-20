@@ -66,7 +66,7 @@ setup();
 
 /**
  * TODO:
- * clean up functions
+ * clean up functions - use localStorage?
  * add game over announcement
  * announce who's turn it is
  * add keyboard shortcut as alternative to turn-button
