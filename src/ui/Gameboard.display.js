@@ -1,12 +1,12 @@
 import Ship from "../classes/Ship";
 
-export function displayBoard(board, id, player) {
-    const boardDiv = document.getElementById(id);
-
+export function displayBoard(board, id, gameActive) {
     for (let r = 0; r < board.getRows(); r++) {
         for (let c = 0; c < board.getColumns(); c++) {
             const cell = document.querySelector(`#${id}-cell-${r}-${c}`);
-            console.log(cell);
+
+            if (gameActive)
+                cell.classList.add('game-active');
 
             switch (board.getBoard()[r][c]) {
                 case 5:
@@ -15,32 +15,28 @@ export function displayBoard(board, id, player) {
                 case 2:
                     cell.style.backgroundColor = 'lightgray';
                     break;
-            }
-
-            cell.addEventListener('click', () => {
-                board.receiveAttack(r, c);
-                if (board.getBoard()[r][c] == 'H') {
+                case 'H':
                     cell.style.backgroundColor = 'darkred';
-                } else if (board.getBoard()[r][c] == 'M') {
+                    break;
+                case 'M':
                     cell.style.backgroundColor = 'navy';
-                }
-                
-                cell.style.pointerEvents = 'none';
-
-                if (board.allShipsSunk()) {
-                    console.log(`All of ${player.getName()}'s ships have sunk!`);
-                }
-            });
+                    break;
+            }
         }
     }
 }
 
-export function displayEmptyBoards(board, id, player) {
+export function displayEmptyBoards(playerBoard, enemyBoard, id, player) {
+    displayEmptyPlayerBoard(playerBoard, id, player);
+    displayEnemyBoard(enemyBoard, id == 'board1' ? 'enemy1' : 'enemy2', player, false);
+}
+
+function displayEmptyPlayerBoard(board, id, player) {
     const boardDiv = document.getElementById(id);
     boardDiv.style.gridTemplateRows = `repeat(${board.getRows()}, 64px)`;
     boardDiv.style.gridTemplateColumns = `repeat(${board.getRows()}, 64px)`;
 
-    boardDiv.previousElementSibling.previousElementSibling.textContent = player.getName();
+    boardDiv.previousElementSibling.previousElementSibling.previousElementSibling.textContent = player.getName();
 
     while (boardDiv.firstChild)
         boardDiv.removeChild(boardDiv.firstChild);
@@ -54,7 +50,52 @@ export function displayEmptyBoards(board, id, player) {
             boardDiv.appendChild(cell);
         }
     }
-    console.log(boardDiv);
+}
+
+// enemy board refers to current player's view of hits and misses
+export function displayEnemyBoard(enemyBoard, enemyBoardId, player, gameActive) {
+    const enemyBoardDiv = document.getElementById(enemyBoardId);
+    enemyBoardDiv.style.gridTemplateRows = `repeat(${enemyBoard.getRows()}, 64px)`;
+    enemyBoardDiv.style.gridTemplateColumns = `repeat(${enemyBoard.getRows()}, 64px)`;
+
+    while (enemyBoardDiv.firstChild)
+        enemyBoardDiv.removeChild(enemyBoardDiv.firstChild);
+
+    for (let r = 0; r < enemyBoard.getRows(); r++) {
+        for (let c = 0; c < enemyBoard.getColumns(); c++) {
+            const cell = document.createElement('div');
+            cell.classList.add('enemy-cell');
+            cell.setAttribute('id', `${enemyBoardId}-cell-${r}-${c}`);
+
+            if (gameActive)
+                cell.classList.add('game-active');
+
+            const marker = enemyBoard.getBoard()[r][c];
+
+            if (marker == 'H') {
+                cell.style.backgroundColor = 'darkred';
+            } else if (marker == 'M') {
+                cell.style.backgroundColor = 'rgb(64, 64, 64)';
+            }
+
+            cell.addEventListener('click', () => {
+                enemyBoard.receiveAttack(r, c);
+                if (enemyBoard.getBoard()[r][c] == 'H') {
+                    cell.style.backgroundColor = 'darkred';
+                } else if (enemyBoard.getBoard()[r][c] == 'M') {
+                    cell.style.backgroundColor = 'rgb(64, 64, 64)';
+                }
+                
+                cell.style.pointerEvents = 'none';
+
+                if (enemyBoard.allShipsSunk()) {
+                    console.log(`All of ${player.getName()}'s ships have sunk!`);
+                }
+            });
+
+            enemyBoardDiv.appendChild(cell);
+        }
+    }
 }
 
 // temp function - let users place ships later

@@ -28,6 +28,7 @@ header {
     grid-template-rows: auto 1fr 1fr;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
+    gap: 24px;
 }
 
 .playerone {
@@ -50,13 +51,19 @@ header {
     align-self: center;
 }
 
-#board1, #board2 {
+#enemy1, #enemy2 {
     grid-row: 2;
     grid-column: 1 / -1;
     display: grid;
 }
 
-.cell {
+#board1, #board2 {
+    grid-row: 3;
+    grid-column: 1 / -1;
+    display: grid;
+}
+
+.cell, .enemy-cell {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,16 +71,23 @@ header {
     height: 64px;
     width: 64px;
     text-align: center;
-    background-color: rgb(94, 94, 209);
 
     border: 1px solid black;
 }
 
-.cell:hover {
+.cell.game-active {
+    background-color: rgb(94, 94, 209);
+}
+
+.enemy-cell.game-active {
+    background-color: gray;
+}
+
+.enemy-cell.game-active:hover {
     cursor: pointer;
     filter: brightness(1.5);
 }
 
-.cell:active {
+.enemy-cell.game-active:active {
     filter: brightness(0.75);
 }
