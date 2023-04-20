@@ -1,13 +1,22 @@
+:root {
+    --background-color: rgb(244, 230, 191);
+    --foreground-color: rgb(120, 66, 22);
+}
+
 html, body {
     margin: 0;
     padding: 0;
 }
 
 body {
-    height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 0 8px;
+
+    height: 100vh;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    background-color: var(--background-color);
+    color: var(--foreground-color);
 }
 
 header {
@@ -21,6 +30,8 @@ header {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     column-gap: 24px;
+
+    padding-bottom: 24px;
 }
 
 .playerone, .playertwo {
@@ -72,7 +83,7 @@ header {
     width: 64px;
     text-align: center;
 
-    border: 1px solid black;
+    border: 1px solid var(--foreground-color);
 }
 
 .cell.game-active {
@@ -94,4 +105,21 @@ header {
 
 .turn {
     pointer-events: none;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: var(--foreground-color);
+    color: var(--background-color);
+    border: none;
+    border-radius: 5px;
+}
+
+button#start {
+    padding: 16px 24px;
+}
+
+button:hover {
+    cursor: pointer;
+    filter: brightness(1.5);
 }
