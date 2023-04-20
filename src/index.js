@@ -1,6 +1,6 @@
 import Gameboard from "./classes/Gameboard";
 import Player from "./classes/Player";
-import { displayBoard, populateBoards } from "./ui/Gameboard.display";
+import { displayBoard, displayEmptyBoards, populateBoards } from "./ui/Gameboard.display";
 
 function setup(board_length = 10) {
     const playerOne = Player('P1');
@@ -10,6 +10,15 @@ function setup(board_length = 10) {
     const boardTwo = Gameboard(board_length, board_length);
     
     const startGameButton = document.querySelector('button#start');
+    const player1DoneButton = document.querySelector('.playerone button');
+    const player2DoneButton = document.querySelector('.playertwo button');
+    
+    player1DoneButton.style.pointerEvents = 'none';
+    player2DoneButton.style.pointerEvents = 'none';
+
+    displayEmptyBoards(boardOne, 'board1', playerOne);
+    displayEmptyBoards(boardTwo, 'board2', playerTwo);
+
     startGameButton.addEventListener('click', () => {
         populateBoards(board_length, boardOne, boardTwo);
         displayBoard(boardOne, 'board1', playerOne);
@@ -17,9 +26,6 @@ function setup(board_length = 10) {
         startGameButton.style.pointerEvents = 'none';
         player1DoneButton.style.pointerEvents = 'auto';
     });
-
-    const player1DoneButton = document.querySelector('.playerone button');
-    player1DoneButton.style.pointerEvents = 'none';
 
     player1DoneButton.addEventListener('click', () => {
         document.querySelector('#board1').style.display = 'none';
@@ -29,9 +35,6 @@ function setup(board_length = 10) {
         player1DoneButton.style.pointerEvents = 'none';
         player2DoneButton.style.pointerEvents = 'auto';
     });
-
-    const player2DoneButton = document.querySelector('.playertwo button');
-    player2DoneButton.style.pointerEvents = 'none';
     
     player2DoneButton.addEventListener('click', () => {
         document.querySelector('#board2').style.display = 'none';
