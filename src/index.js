@@ -3,22 +3,8 @@ import Player from "./classes/Player";
 import { displayBoard, displayEmptyBoards, displayEnemyBoard, populateBoards } from "./ui/Gameboard.display";
 
 function setup(board_length = 10) {
-    /**
-     * 1: Load empty boards
-     * 2: ask player 1 to set up their ships
-     * 3: ask player 2 to set up their ships
-     * 4: once both are done, it is player 1's turn
-     * 5: player one's top grid shows their own ships, not clickable
-     *    - bottom grid show's enemy grid, which is clickable
-     * 6: same for player 2 ^
-     */
-
-
-    const playerOne = Player('P1');
-    const playerTwo = Player('P2');
-
-    const boardOne = Gameboard(board_length, board_length);
-    const boardTwo = Gameboard(board_length, board_length);
+    const playerOne = Player('P1'), playerTwo = Player('P2');
+    const boardOne = Gameboard(board_length), boardTwo = Gameboard(board_length);
     
     const startGameButton = document.querySelector('button#start');
     const player1DoneButton = document.querySelector('.playerone button');
@@ -32,6 +18,8 @@ function setup(board_length = 10) {
 
     startGameButton.addEventListener('click', () => {
         populateBoards(board_length, boardOne, boardTwo);
+        // ^ replace in future to let players place their own ships
+        
         displayBoard(boardOne, 'board1', true);
         displayEnemyBoard(boardTwo, 'enemy1', playerTwo, true);
 
@@ -70,6 +58,6 @@ function setup(board_length = 10) {
 setup();
 
 /**
- * TODO: show players an empty grid so can't see the other's ships,
- * and show their own boats underneath 
+ * TODO:
+ * only let players click on one cell
  */

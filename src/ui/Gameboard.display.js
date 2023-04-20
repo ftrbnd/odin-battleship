@@ -57,6 +57,7 @@ export function displayEnemyBoard(enemyBoard, enemyBoardId, player, gameActive) 
     const enemyBoardDiv = document.getElementById(enemyBoardId);
     enemyBoardDiv.style.gridTemplateRows = `repeat(${enemyBoard.getRows()}, 64px)`;
     enemyBoardDiv.style.gridTemplateColumns = `repeat(${enemyBoard.getRows()}, 64px)`;
+    enemyBoardDiv.classList.toggle('turn');
 
     while (enemyBoardDiv.firstChild)
         enemyBoardDiv.removeChild(enemyBoardDiv.firstChild);
@@ -78,20 +79,27 @@ export function displayEnemyBoard(enemyBoard, enemyBoardId, player, gameActive) 
                 cell.style.backgroundColor = 'rgb(64, 64, 64)';
             }
 
-            cell.addEventListener('click', () => {
-                enemyBoard.receiveAttack(r, c);
-                if (enemyBoard.getBoard()[r][c] == 'H') {
-                    cell.style.backgroundColor = 'darkred';
-                } else if (enemyBoard.getBoard()[r][c] == 'M') {
-                    cell.style.backgroundColor = 'rgb(64, 64, 64)';
-                }
-                
-                cell.style.pointerEvents = 'none';
+            if (marker != 'H' && marker != 'M') {                
+                cell.addEventListener('click', () => {
+                    enemyBoardDiv.classList.toggle('turn');
 
-                if (enemyBoard.allShipsSunk()) {
-                    console.log(`All of ${player.getName()}'s ships have sunk!`);
-                }
-            });
+                    enemyBoard.receiveAttack(r, c);
+                    if (enemyBoard.getBoard()[r][c] == 'H') {
+                        cell.style.backgroundColor = 'darkred';
+                        cell.style.pointerEvents = 'none';
+                    } else if (enemyBoard.getBoard()[r][c] == 'M') {
+                        cell.style.backgroundColor = 'rgb(64, 64, 64)';
+                    }
+
+                    cell.style.pointerEvents = 'none';
+                    
+                    if (enemyBoard.allShipsSunk()) {
+                        console.log(`All of ${player.getName()}'s ships have sunk!`);
+                    }
+                });
+            } else {
+                cell.style.pointerEvents = 'none';
+            }
 
             enemyBoardDiv.appendChild(cell);
         }

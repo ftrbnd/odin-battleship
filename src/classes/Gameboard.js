@@ -1,4 +1,4 @@
-const Gameboard = (rows = 8, cols = 8) => {
+const Gameboard = (rows = 8, cols = rows) => {
     rows = rows <= 8 ? 8 : rows; // enforce minimum board size
     cols = cols <= 8 ? 8 : cols;
 

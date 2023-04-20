@@ -91,3 +91,7 @@ header {
 .enemy-cell.game-active:active {
     filter: brightness(0.75);
 }
+
+.turn {
+    pointer-events: none;
+}
