@@ -53,6 +53,17 @@ header {
 .playerone h2, .playertwo h2 {
     grid-column: 1;
     grid-row: 1;
+
+    justify-self: end;
+}
+
+h2:hover {
+    cursor: pointer;
+    filter: brightness(1.5);
+}
+
+h2:active {
+    filter: brightness(0.75);
 }
 
 .playerone button, .playertwo button {
@@ -60,6 +71,7 @@ header {
     grid-row: 1;
 
     align-self: center;
+    justify-self: start;
 }
 
 #enemy1, #enemy2 {

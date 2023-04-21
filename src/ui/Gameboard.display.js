@@ -36,7 +36,12 @@ function displayEmptyPlayerBoard(board, id, player) {
     boardDiv.style.gridTemplateRows = `repeat(${board.getRows()}, 64px)`;
     boardDiv.style.gridTemplateColumns = `repeat(${board.getRows()}, 64px)`;
 
-    boardDiv.previousElementSibling.previousElementSibling.previousElementSibling.textContent = player.getName();
+    const playerName = boardDiv.previousElementSibling.previousElementSibling.previousElementSibling;
+    playerName.textContent = player.getName();
+    playerName.addEventListener('click', () => {
+        player.setName(prompt(`Enter ${player.getName()}'s new name:`) || player.getName());
+        playerName.textContent = player.getName();
+    });
 
     while (boardDiv.firstChild)
         boardDiv.removeChild(boardDiv.firstChild);
