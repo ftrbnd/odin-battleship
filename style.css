@@ -55,6 +55,7 @@ header {
     grid-row: 1;
 
     justify-self: end;
+    padding: 8px 32px;
 }
 
 h2:hover {
@@ -64,6 +65,12 @@ h2:hover {
 
 h2:active {
     filter: brightness(0.75);
+}
+
+.current-turn {
+    color: var(--background-color);
+    background-color: var(--foreground-color);
+    border-radius: 15px;
 }
 
 .playerone button, .playertwo button {
