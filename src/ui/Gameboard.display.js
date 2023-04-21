@@ -26,14 +26,14 @@ export function displayBoard(board, id, gameActive) {
     }
 }
 
-export function displayEmptyBoards(playerBoard, enemyBoard, id, player) {
-    initializePlayerBoard(playerBoard, id, player);
-    displayPlayerName(id, player)
-    displayEnemyBoard(enemyBoard, id == 'board1' ? 'enemy1' : 'enemy2', player, false);
+export function displayEmptyBoards(playerBoard, enemyBoard, boardId, player) {
+    initializePlayerBoard(playerBoard, boardId);
+    displayPlayerName(boardId, player)
+    displayEnemyBoard(enemyBoard, boardId == 'board1' ? 'enemy1' : 'enemy2', player, false);
 }
 
-function initializePlayerBoard(board, id, player) {
-    const boardDiv = document.getElementById(id);
+function initializePlayerBoard(board, boardId) {
+    const boardDiv = document.getElementById(boardId);
     boardDiv.style.gridTemplateRows = `repeat(${board.getRows()}, 64px)`;
     boardDiv.style.gridTemplateColumns = `repeat(${board.getRows()}, 64px)`;
 
@@ -44,15 +44,15 @@ function initializePlayerBoard(board, id, player) {
         for (let c = 0; c < board.getColumns(); c++) {
             const cell = document.createElement('div');
             cell.classList.add('cell');
-            cell.setAttribute('id', `${id}-cell-${r}-${c}`);
+            cell.setAttribute('id', `${boardId}-cell-${r}-${c}`);
 
             boardDiv.appendChild(cell);
         }
     }
 }
 
-function displayPlayerName(id, player) {
-    const boardDiv = document.getElementById(id);
+function displayPlayerName(boardId, player) {
+    const boardDiv = document.getElementById(boardId);
     const playerName = boardDiv.previousElementSibling.previousElementSibling.previousElementSibling;
     playerName.textContent = player.getName();
     playerName.addEventListener('click', () => {
