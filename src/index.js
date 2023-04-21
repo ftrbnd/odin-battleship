@@ -18,6 +18,14 @@ function setup(board_length = 10) {
 
     let nextTurn = true;
     startGameButton.addEventListener('click', () => {
+        /**
+         * display ships to choose from
+         * highlight current ship
+         * clicking on a grid will attempt to place it
+         *   - can succeed
+         *   - can fail - ask to place again
+         */
+
         populateBoards(board_length, boardOne, boardTwo);
         // ^ replace in future to let players place their own ships
         
@@ -89,6 +97,7 @@ setup();
 
 /**
  * TODO:
+ * let players place their own ships
  * clean up functions - use localStorage?
  * add game over announcement
  * allow skip turns?

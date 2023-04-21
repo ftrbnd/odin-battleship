@@ -27,21 +27,15 @@ export function displayBoard(board, id, gameActive) {
 }
 
 export function displayEmptyBoards(playerBoard, enemyBoard, id, player) {
-    displayEmptyPlayerBoard(playerBoard, id, player);
+    initializePlayerBoard(playerBoard, id, player);
+    displayPlayerName(id, player)
     displayEnemyBoard(enemyBoard, id == 'board1' ? 'enemy1' : 'enemy2', player, false);
 }
 
-function displayEmptyPlayerBoard(board, id, player) {
+function initializePlayerBoard(board, id, player) {
     const boardDiv = document.getElementById(id);
     boardDiv.style.gridTemplateRows = `repeat(${board.getRows()}, 64px)`;
     boardDiv.style.gridTemplateColumns = `repeat(${board.getRows()}, 64px)`;
-
-    const playerName = boardDiv.previousElementSibling.previousElementSibling.previousElementSibling;
-    playerName.textContent = player.getName();
-    playerName.addEventListener('click', () => {
-        player.setName(prompt(`Enter ${player.getName()}'s new name:`) || player.getName());
-        playerName.textContent = player.getName();
-    });
 
     while (boardDiv.firstChild)
         boardDiv.removeChild(boardDiv.firstChild);
@@ -55,6 +49,16 @@ function displayEmptyPlayerBoard(board, id, player) {
             boardDiv.appendChild(cell);
         }
     }
+}
+
+function displayPlayerName(id, player) {
+    const boardDiv = document.getElementById(id);
+    const playerName = boardDiv.previousElementSibling.previousElementSibling.previousElementSibling;
+    playerName.textContent = player.getName();
+    playerName.addEventListener('click', () => {
+        player.setName(prompt(`Enter ${player.getName()}'s new name:`) || player.getName());
+        playerName.textContent = player.getName();
+    });
 }
 
 // enemy board refers to current player's view of hits and misses
