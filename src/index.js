@@ -48,6 +48,8 @@ function setup(board_length = 10) {
 }
 
 function playerOneDone(board, enemyBoard, player, button, enemyButton) {
+    toggleDisplayNames();
+
     document.querySelector('#board1').style.display = 'none';
     document.querySelector('#enemy1').style.display = 'none';
     document.querySelector('#board2').style.display = 'grid';
@@ -61,6 +63,8 @@ function playerOneDone(board, enemyBoard, player, button, enemyButton) {
 }
 
 function playerTwoDone(board, enemyBoard, player, button, enemyButton) {
+    toggleDisplayNames();
+
     document.querySelector('#board2').style.display = 'none';
     document.querySelector('#enemy2').style.display = 'none';
     document.querySelector('#board1').style.display = 'grid';
@@ -73,13 +77,20 @@ function playerTwoDone(board, enemyBoard, player, button, enemyButton) {
     enemyButton.style.pointerEvents = 'auto';
 }
 
+function toggleDisplayNames() {
+    const player1Name = document.getElementById('board1').previousElementSibling.previousElementSibling.previousElementSibling;
+    const player2Name = document.getElementById('board2').previousElementSibling.previousElementSibling.previousElementSibling;
+
+    player1Name.classList.toggle('current-turn');
+    player2Name.classList.toggle('current-turn');
+}
+
 setup();
 
 /**
  * TODO:
  * clean up functions - use localStorage?
  * add game over announcement
- * announce who's turn it is
  * allow skip turns?
  * show individual boats
  */
