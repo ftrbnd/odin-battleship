@@ -16,6 +16,7 @@ function setup(board_length = 10) {
     displayEmptyBoards(boardOne, boardTwo, 'board1', playerOne);
     displayEmptyBoards(boardTwo, boardOne, 'board2', playerTwo);
 
+    let nextTurn = true;
     startGameButton.addEventListener('click', () => {
         populateBoards(board_length, boardOne, boardTwo);
         // ^ replace in future to let players place their own ships
@@ -25,6 +26,16 @@ function setup(board_length = 10) {
 
         startGameButton.style.pointerEvents = 'none';
         player1DoneButton.style.pointerEvents = 'auto';
+
+        window.addEventListener('keydown', e => {
+            if (e.code == 'KeyN') {
+                nextTurn ?
+                    playerOneDone(boardOne, boardTwo, playerOne, player1DoneButton, player2DoneButton)
+                    :
+                    playerTwoDone(boardTwo, boardOne, playerTwo, player2DoneButton, player1DoneButton);
+                nextTurn = !nextTurn;
+            }
+        });
     });
 
     player1DoneButton.addEventListener('click', () => {
@@ -69,5 +80,6 @@ setup();
  * clean up functions - use localStorage?
  * add game over announcement
  * announce who's turn it is
- * add keyboard shortcut as alternative to turn-button
+ * allow skip turns?
+ * show individual boats
  */
