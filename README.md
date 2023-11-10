@@ -17,7 +17,7 @@
     <img src="https://avatars.githubusercontent.com/u/4441966" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Knight Travails</h3>
+<h3 align="center">Battleship</h3>
 
   <p align="center">
     The eleventh project in The Odin Project's JavaScript course
